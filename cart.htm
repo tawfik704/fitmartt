@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Fitmart</title>
+    <link rel="stylesheet" href="products.css">
+</head>
+<body>
+    <header>
+        <h1>Your Shopping Cart</h1>
+        <button id="empty-cart-btn">Empty Cart</button>
+    </header>
+
+    <div class="product-container" id="cart-items">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const emptyCartButton = document.getElementById('empty-cart-btn');
+
+            // Retrieve cart items from localStorage
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Check if cart is empty
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+            } else {
+                // Display cart items
+                cartItems.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('product');
+                    itemElement.innerHTML = `
+                            <div class="product-content">
+                                <h3>${item.name}</h3>
+                                <img src="${item.image}" alt="${item.name}">
+                                <p>${item.description}</p>
+                            </div>
+                        `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+            }
+
+            // Event listener for emptying the cart
+            emptyCartButton.addEventListener('click', function () {
+                // Clear the cart items from localStorage
+                localStorage.removeItem('cart');
+                // Remove all cart items from the cart display
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+            });
+        });
+    </script>
+</body>
+</html>
