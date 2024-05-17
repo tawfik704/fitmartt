@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Equipment - Fitmart</title>
+    <link rel="stylesheet" href="products.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Fitmart</h1>
+        <a href="cart.htm">
+            <img src="imgs/cart.jpg" alt="cart">
+        </a>
+    </header>
+    <h1>Fitness Equipment</h1>
+
+    <div class="product-container">
+        <div class="product">
+            <img src="imgs/FE-PD1.jpeg" alt="Product 1">
+            <div class="product-content">
+                <h3>Bag With Shoe Compartment</h3>
+                <p>An all-purpose gym bag with a separate compartment for shoes. Made from durable materials, it's perfect for carrying all your workout gear.</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="imgs/FE-PD3.jpeg" alt="Product 2">
+            <div class="product-content">
+                <h3>Lifting Straps With Hook</h3>
+                <p>Durable lifting straps with hooks for enhanced grip during weightlifting exercises. Ideal for heavy lifting sessions.</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="imgs/FE-PD4.jpeg" alt="Protein Shaker">
+            <div class="product-content">
+                <h3>Protein Shaker Bottle</h3>
+                <p>A high-quality shaker bottle for mixing protein shakes. Features a secure lid and a built-in mixing ball for smooth shakes every time.</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="imgs/FE-PD5.jpeg" alt="Weightlifting Belt">
+            <div class="product-content">
+                <h3>Weightlifting Belt</h3>
+                <p>A supportive weightlifting belt to stabilize your core and protect your back during heavy lifts. Made from durable materials for long-lasting performance.</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="imgs/FE-PD6.jpeg" alt="Knee Support">
+            <div class="product-content">
+                <h3>Knee Support</h3>
+                <p>Provides compression and support for the knee joint during intense workouts or recovery. Helps reduce discomfort and stabilize the knee for better performance.</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="imgs/tshirt.jpg" alt="Black Mirror T-Shirt">
+            <div class="product-content">
+                <h3>GYM  T-Shirt</h3>
+                <p>A stylish and comfortable t-shirt designed for workouts. Made from breathable fabric to keep you cool and dry during exercise. Features a unique  design.</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addToCartButtons = document.querySelectorAll('.product button');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    const product = button.closest('.product');
+                    const productName = product.querySelector('h3').innerText;
+                    const productImage = product.querySelector('img').getAttribute('src');
+                    const productDescription = product.querySelector('p').innerText;
+
+                    // Construct an object representing the product
+                    const cartItem = {
+                        name: productName,
+                        image: productImage,
+                        description: productDescription
+                        // Add other product details here
+                    };
+
+                    // Retrieve existing cart items from localStorage or initialize an empty array
+                    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+                    // Add the new item to the cart
+                    cartItems.push(cartItem);
+
+                    // Store the updated cart items back to localStorage
+                    localStorage.setItem('cart', JSON.stringify(cartItems));
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
